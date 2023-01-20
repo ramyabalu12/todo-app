@@ -1,15 +1,19 @@
 package com.growfin.todo;
-import javax.persistence.*;
+import jakarta.persistence.*;
+import java.util.Objects;
+
 @Entity
-@Table
+@Table(name = "item")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
+
     private String description;
 
-
+    public Item(){}
 
     public Item(String name, String description) {
         this.name = name;

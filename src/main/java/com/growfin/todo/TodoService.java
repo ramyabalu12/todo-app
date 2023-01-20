@@ -21,4 +21,12 @@ public class TodoService {
     public List<Item> viewItem() {
         return todoRepository.findAll();
     }
+
+    public void updateItem(Item item) {
+        int id = item.getId();
+        Item existingitem = todoRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        existingitem.setName(item.getName());
+        existingitem.setDescription(item.getDescription());
+        todoRepository.save(existingitem);
+    }
 }

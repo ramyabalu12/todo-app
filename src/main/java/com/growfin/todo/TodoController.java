@@ -24,4 +24,14 @@ public class TodoController {
     public List<Item> viewItem() {
         return todoService.viewItem();
     }
+    @PutMapping("/todo/items")
+    void updateItem(@RequestBody Item item){
+        try {
+            todoService.updateItem(item);
+        }
+        catch ( RuntimeException e){
+            System.out.println("Item not found....");
+        }
+    }
+
 }
