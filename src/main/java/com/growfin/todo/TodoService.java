@@ -1,13 +1,18 @@
 package com.growfin.todo;
+
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Service
 public class TodoService {
+    private static final Logger log = LoggerFactory.getLogger(RabbitMqConsumer.class);
+
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
     @Value("${rabbitmq.routingKey.name}")
@@ -19,9 +24,9 @@ public class TodoService {
     public RabbitTemplate rabbitTemplate;
 
     public int addItem(Item item) {
-        Item itemSaved =todoRepository.save(item);
+        Item itemSaved = todoRepository.save(item);
         int id = itemSaved.getId();
-        rabbitTemplate.convertAndSend(exchange,routingKey,id);
+        rabbitTemplate.convertAndSend(exchange, routingKey, id);
         return id;
     }
 
@@ -31,8 +36,8 @@ public class TodoService {
 
     public List<Item> viewItem() {
         List<Item> items = todoRepository.findAll();
-        System.out.println("message sent ....");
-        rabbitTemplate.convertAndSend(exchange,routingKey,
+        log.info("message sent ....");
+        rabbitTemplate.convertAndSend(exchange, routingKey,
                 items);
         return items;
     }

@@ -12,7 +12,7 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 
 @Configuration
-public class RabbitMQConfiq {
+public class RabbitMQConfig {
     @Value("${rabbitmq.queue.name}")
     private String queue;
     @Value("${rabbitmq.exchange.name}")

@@ -1,11 +1,13 @@
 package com.growfin.todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
 public class TodoController {
+    private static final Logger log = LoggerFactory.getLogger(RabbitMqConsumer.class);
     @Autowired
     TodoService todoService;
 
@@ -30,7 +32,7 @@ public class TodoController {
             todoService.updateItem(item);
         }
         catch ( RuntimeException e){
-            System.out.println("Item not found....");
+            log.info("Item not found....");
         }
     }
 
