@@ -1,7 +1,7 @@
 package com.growfin.todo;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
